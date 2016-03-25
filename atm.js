@@ -25,9 +25,21 @@ function depositChecking() {
 }
 
 function withdrawalChecking() {
-  var checkingInput = checkingField.value
-  checkingAmount1 = checkingAmount1 - parseInt(checkingInput);
+  var checkingInput = checkingField.value;
+  var tempCheckingBal = checkingAmount1 - parseInt(checkingInput);
+  if (tempCheckingBal >= 0) {
+     checkingAmount1 = tempCheckingBal;
+  }
+  else if (tempCheckingBal <= 0 && tempCheckingBal+savingsAmount1 >= 0){
+    savingsAmount1 += tempCheckingBal;
+    checkingAmount1 = 0;
+    savingsBalDisplay.innerHTML="$"+savingsAmount1;
+
+  }
+  else {alert("you have insufficient funds. grossly insufficient.")
+}
   checkingBalDisplay.innerHTML="$"+checkingAmount1;
+
 }
 
 function depositSavings() {
